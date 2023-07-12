@@ -1,0 +1,91 @@
+from functools import total_ordering
+from datetime import datetime
+
+piso_departamento = [i for i in range (1, 41)]
+departamento_comprados = []
+ganancia_total = 0
+g = "-------------------------------------"
+
+def seleccion_de_piso():
+ while True:
+  try:
+    piso = int(input("Por favor, Seleccione la cantidad de departamentos que desea comprar: "))
+    #tuve que camiar el ejercicio para que funcione debido a lo que estudie
+    if piso < 1 or piso > 2:
+     print("Solo puede comprar 2 departamentos, por favor, seleccione una opcion valida.")
+    else:
+      return piso
+  except ValueError:
+    print("Error")
+
+
+def tipo_departamento(a):
+  while a != 0:
+    try:
+      print(piso_departamento)
+      depto = int(input("Seleccione su número de departamento: "))
+      if depto in piso_departamento:
+        a -= 1
+        rut= int(input("Digíte su rut sin puntos ni guión: "))
+        lista_x = [depto, rut]
+        departamento_comprados.append(lista_x)
+        piso_departamento [depto -1] = "X"
+      else:
+        print ("Departamento no disponible.")
+    except ValueError:
+      print ("Error")
+
+def ganancias_totales():
+  tipoa= 0
+  tipob= 0
+  tipoc= 0
+  tipod= 0
+  for i in departamento_comprados:
+    a = i[0]
+    if a in range [31, 41]:
+       tipoa += 3800
+    elif a in range [21, 31]:
+         tipob += 3000
+    elif a in range [11, 21]:
+         tipoc += 2800
+    elif a in range [1, 11]:
+         tipod += 3500
+
+    total_ganancias = tipoa + tipob + tipoc + tipod
+    print(f"Las ventas totales son: ${total_ganancias}UF")
+
+print(g)
+print("Inmobiliaria casa feliz")
+print(g)
+print("1. Comprar Departamento")
+print("2. Mostrar departamentos disponibles")
+print("3. Ver listado de compradores")
+print("4. Mostrar ganancia totales")
+print("5. salir")
+print(g)
+opcion = int(input("Por favor, seleccione una opción: "))
+print(g)
+
+while True:
+  try:
+
+    if opcion == 1:
+     tipo_departamento(seleccion_de_piso())
+    elif opcion == 2:
+      print(piso_departamento)
+    elif opcion == 3:
+      for f in range(1, 41):
+        for i in departamento_comprados:
+          if i [0] == f:
+            print(i[1])
+    elif opcion == 4:
+      ganancias_totales()
+    elif opcion == 5:
+     break
+    else:
+      print("Opción no valid, por favor intentar nuevamente")
+  except ValueError:
+   print("Error")
+
+fecha= datetime.now().date()
+print("Gracias por visitar Inmobiliaria casa feliz\nBruce Orellana", fecha)
